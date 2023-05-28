@@ -36,8 +36,10 @@ pip install -r requirements.txt
 To run the plugin, enter the following command:
 
 ```bash
-# Add your command here
+python main.py
 ```
+
+![demo](docs/images/demo.gif)
 
 Once the local server is running:
 
