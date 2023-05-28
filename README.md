@@ -1,8 +1,31 @@
-# ChatGPT plugins quickstart
+# 📊 Charts-Generator-ChatGPT-Plugin
 
-Get a todo list ChatGPT plugin up and running in under 5 minutes using Python. If you do not already have plugin developer access, please [join the waitlist](https://openai.com/waitlist/plugins).
+This plugin uses OpenAI's ChatGPT to turn text or URL content into ECharts visualizations. 🚀🤖
 
-## Setup
+## Description
+
+The Charts-Generator-ChatGPT-Plugin leverages the capabilities of OpenAI's ChatGPT to interpret and analyze user input or web content, and generate corresponding statistical charts using ECharts. It takes a text description or a URL as input, summarizes the content, creates a description that conforms to a statistical chart, and finally converts the description into a chart configuration form that can be implemented by the ECharts library.
+
+Here's a flowchart that illustrates the process:
+
+```mermaid
+graph LR
+    A[User Input] --> B{URL or Text?}
+    B -->|URL| D1[third-party plugin.]
+    B -->|Text| D[Process Text Description]
+    D1 --> D
+
+    D --> ChatGPT[ChatGPT Convert to ECharts Configuration]
+
+    ChatGPT --> Plugin(Covert Echarts Configuration to pyecharts options)
+    Plugin --> G[Output ECharts Image or Html]
+```
+
+_third-party plugin: `LinkReader` or `WebPilot`_
+
+## Quickstart
+
+### Setup
 
 To install the required packages for this plugin, run the following command:
 
@@ -13,19 +36,18 @@ pip install -r requirements.txt
 To run the plugin, enter the following command:
 
 ```bash
-python main.py
+# Add your command here
 ```
 
 Once the local server is running:
 
-1. Navigate to https://chat.openai.com. 
-2. In the Model drop down, select "Plugins" (note, if you don't see it there, you don't have access yet).
-3. Select "Plugin store"
-4. Select "Develop your own plugin"
-5. Enter in `localhost:5003` since this is the URL the server is running on locally, then select "Find manifest file".
-
-The plugin should now be installed and enabled! You can start with a question like "What is on my todo list" and then try adding something to it as well! 
+Navigate to https://chat.openai.com.
+In the Model drop down, select "Plugins".
+Select "Plugin store".
+Select "Develop your own plugin".
+Enter in localhost:5003 since this is the URL the server is running on locally, then select "Find manifest file".
+The plugin should now be installed and enabled!
 
 ## Getting help
 
-If you run into issues or have questions building a plugin, please join our [Developer community forum](https://community.openai.com/c/chat-plugins/20).
+If you run into issues or have questions building a plugin, please join our Developer community forum.

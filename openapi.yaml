@@ -1,93 +1,33 @@
 openapi: 3.0.1
 info:
-  title: TODO Plugin
-  description: A plugin that allows the user to create and manage a TODO list using ChatGPT. If you do not know the user's username, ask them first before making queries to the plugin. Otherwise, use the username "global".
-  version: 'v1'
+  title: Charts Generator ChatGPT Plugin
+  description: A plugin that creates ECharts based on user input or URL content.
+  version: "v1"
 servers:
   - url: http://localhost:5003
 paths:
-  /todos/{username}:
-    get:
-      operationId: getTodos
-      summary: Get the list of todos
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
+  /charts:
+    post:
+      operationId: createChart
+      summary: Create an EChart based on a JSON options object
+      requestBody:
         required: true
-        description: The name of the user.
+        content:
+          application/json:
+            schema:
+              type: object
+              description: ECharts options object
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getTodosResponse'
-    post:
-      operationId: addTodo
-      summary: Add a todo to the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/addTodoRequest'
-      responses:
-        "200":
-          description: OK
-    delete:
-      operationId: deleteTodo
-      summary: Delete a todo from the list
-      parameters:
-      - in: path
-        name: username
-        schema:
-            type: string
-        required: true
-        description: The name of the user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/deleteTodoRequest'
-      responses:
-        "200":
-          description: OK
-
-components:
-  schemas:
-    getTodosResponse:
-      type: object
-      properties:
-        todos:
-          type: array
-          items:
-            type: string
-          description: The list of todos.
-    addTodoRequest:
-      type: object
-      required:
-      - todo
-      properties:
-        todo:
-          type: string
-          description: The todo to add to the list.
-          required: true
-    deleteTodoRequest:
-      type: object
-      required:
-      - todo_idx
-      properties:
-        todo_idx:
-          type: integer
-          description: The index of the todo to delete.
-          required: true
+                type: object
+                properties:
+                  htmlPath:
+                    type: string
+                    description: Path to the generated HTML file
+                  imgPath:
+                    type: string
+                    description: Path to the generated PNG image

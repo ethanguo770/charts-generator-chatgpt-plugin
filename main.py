@@ -1,34 +1,42 @@
 import json
+import uuid
 
 import quart
 import quart_cors
-from quart import request
+from quart import request, send_from_directory
+
+# components used for generating charts.
+from pyecharts.charts.base import Base
 
 app = quart_cors.cors(quart.Quart(__name__), allow_origin="https://chat.openai.com")
 
-# Keep track of todo's. Does not persist if Python session is restarted.
-_TODOS = {}
+# create chart with options
+@app.post("/charts")
+async def create_chart():
+    options = await quart.request.get_json(force=True)
+    chart = Base()
+    chart.options = options
 
-@app.post("/todos/<string:username>")
-async def add_todo(username):
-    request = await quart.request.get_json(force=True)
-    if username not in _TODOS:
-        _TODOS[username] = []
-    _TODOS[username].append(request["todo"])
-    return quart.Response(response='OK', status=200)
+    suffix = uuid.uuid4()
+    file_name = suffix
+    if 'title' in options:
+        if 'text' in options['title']:
+            file_name = f"{options['title']['text']}_{file_name}"
 
-@app.get("/todos/<string:username>")
-async def get_todos(username):
-    return quart.Response(response=json.dumps(_TODOS.get(username, [])), status=200)
+    html_path = f"output/{file_name}.html"
+    img_path = f"output/{file_name}.png"
+    chart.render(html_path)
 
-@app.delete("/todos/<string:username>")
-async def delete_todo(username):
-    request = await quart.request.get_json(force=True)
-    todo_idx = request["todo_idx"]
-    # fail silently, it's a simple plugin
-    if 0 <= todo_idx < len(_TODOS[username]):
-        _TODOS[username].pop(todo_idx)
-    return quart.Response(response='OK', status=200)
+    response_dict = {}
+    response_dict['htmlPath'] = f"{request.host}/{html_path}"
+    response_dict['imgPath'] = f"{request.host}/{img_path}"
+
+    return quart.Response(response=json.dumps(response_dict), status=200)
+
+# reading locally stored static resources.
+@app.route('/output/<path:path>')
+async def serve_file(path):
+    return await send_from_directory('./output', path)
 
 @app.get("/logo.png")
 async def plugin_logo():

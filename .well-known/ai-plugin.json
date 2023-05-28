@@ -1,18 +1,17 @@
 {
-    "schema_version": "v1",
-    "name_for_human": "TODO List (no auth)",
-    "name_for_model": "todo",
-    "description_for_human": "Manage your TODO list. You can add, remove and view your TODOs.",
-    "description_for_model": "Plugin for managing a TODO list, you can add, remove and view your TODOs.",
-    "auth": {
-      "type": "none"
-    },
-    "api": {
-      "type": "openapi",
-      "url": "http://localhost:5003/openapi.yaml",
-    },
-    "logo_url": "http://localhost:5003/logo.png",
-    "contact_email": "legal@example.com",
-    "legal_info_url": "http://example.com/legal"
-  }
-  
+  "schema_version": "v1",
+  "name_for_human": "Charts Generator ChatGPT Plugin",
+  "name_for_model": "charts_generator",
+  "description_for_human": "The Charts-Generator-ChatGPT-Plugin leverages the capabilities of OpenAI's ChatGPT to interpret and analyze user input or web content, and generate corresponding statistical charts using ECharts. It takes a text description or a URL as input, summarizes the content, creates a description that conforms to a statistical chart, and finally converts the description into a chart configuration form that can be implemented by the ECharts library.",
+  "description_for_model": "A plugin that generates ECharts charts based on user input text or URL, utilizing the ChartGPT web summarization plugin. The plugin supports exporting files in two formats: HTML and PNG.",
+  "auth": {
+    "type": "none"
+  },
+  "api": {
+    "type": "openapi",
+    "url": "http://localhost:5003/openapi.yaml"
+  },
+  "logo_url": "http://localhost:5003/logo.png",
+  "contact_email": "ethanguo770@gmail.com",
+  "legal_info_url": "https://github.com/ethanguo770/charts-generator-chatgpt-plugin/blob/main/LICENSE"
+}
