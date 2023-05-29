@@ -41,6 +41,13 @@ python main.py
 
 ![demo](docs/images/demo.gif)
 
+## Plugin Deploy (Replit)
+1. Open Replit and click the Create Repl button.  
+2. When the pop-up window appears, click the Import from GitHub button in the top right corner.  
+3. In the GitHub URL field, enter https://github.com/ethanguo770/charts-generator-chatgpt-plugin and select Python as the language.  
+4. Then click the Import from GitHub button in the bottom right corner and wait for the initialization to complete.  
+5. Click the Run button and wait for the execution to finish.  
+
 Once the local server is running:
 
 Navigate to https://chat.openai.com.
